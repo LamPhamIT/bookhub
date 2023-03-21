@@ -9,16 +9,12 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-public class Product {
+public class Product extends AbstractModel{
     private String name;
     private String descrip;
     private String details;
-    private double price;
-    private double discount;
-    private long brandID;
-    private Timestamp createdDate;
-    private Timestamp modifiedDate;
-    private String createdBy;
-    private String modifiedBy;
+    private Double price;
+    private Double discount;
+    private Long brandID;
 
 }
