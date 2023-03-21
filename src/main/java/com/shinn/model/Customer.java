@@ -12,11 +12,10 @@ public class Customer extends AbstractModel{
     private String firstName;
     private String lastName;
     private String email;
+    private String address;
     private String city;
     private String country;
     private boolean sex;
     private String phoneNumber;
     private long accountID;
-
-
 }

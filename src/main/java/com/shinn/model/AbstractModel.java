@@ -1,12 +1,13 @@
 package com.shinn.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class AbstractModel {
     private Long id;
     private Timestamp createdDate;

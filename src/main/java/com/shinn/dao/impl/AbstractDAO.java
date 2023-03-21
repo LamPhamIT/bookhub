@@ -2,8 +2,6 @@ package com.shinn.dao.impl;
 
 import com.shinn.dao.idao.GenericDAO;
 import com.shinn.mapper.RowMapper;
-
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +42,33 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         }
     }
 
+    @Override
+    public <T1> boolean update(String sql, Object... paramters) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement =  connection.prepareStatement(sql);
+            setParameters(statement, paramters);
+            return statement.executeUpdate() > 0 ? true : false;
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            try {
+                if(connection != null) {
+                    connection.close();
+                }
+                if(statement != null) {
+                    statement.close();
+                }
+            } catch (Exception e) {
+                return false;
+            }
+        }
+    }
+
+
     public Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -73,6 +98,5 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
