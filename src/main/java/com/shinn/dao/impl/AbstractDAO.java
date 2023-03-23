@@ -43,17 +43,31 @@ public class AbstractDAO<T> implements GenericDAO<T> {
     }
 
     @Override
-    public <T1> boolean update(String sql, Object... paramters) {
+    public <T1> Long insert(String sql, Object... paramters) {
         Connection connection = null;
         PreparedStatement statement = null;
 
         try {
             connection = getConnection();
-            statement =  connection.prepareStatement(sql);
+            statement =  connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             setParameters(statement, paramters);
-            return statement.executeUpdate() > 0 ? true : false;
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            Long id = null;
+            while(resultSet.next()) {
+                id =  resultSet.getLong(1);
+            }
+            connection.commit();
+            return id;
         } catch (SQLException e) {
-            return false;
+            if(connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    return null;
+                }
+            }
+            return null;
         } finally {
             try {
                 if(connection != null) {
@@ -63,11 +77,26 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                     statement.close();
                 }
             } catch (Exception e) {
-                return false;
+                return null;
             }
         }
     }
 
+
+    @Override
+    public <T1> void update(String sql, Object... paramters) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            setParameters(statement, paramters);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public Connection getConnection() {
         try {

@@ -5,9 +5,9 @@ import com.shinn.model.Customer;
 
 public class CustomerDAO extends AbstractDAO<Customer> implements ICustomerDAO {
     @Override
-    public boolean insert(Customer customer) {
+    public Long insert(Customer customer) {
         String sql = "INSERT INTO Customer VALUES(?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        return update(sql, customer.getFirstName(), customer.getLastName());
+        return insert(sql, customer.getFirstName(), customer.getLastName());
 
     }
 }

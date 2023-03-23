@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IAccountDAO {
     List<Account> findAll();
-    boolean insert(Account account);
+    Long insert(Account account);
 }

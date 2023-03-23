@@ -15,9 +15,9 @@ public class AccountDAO extends AbstractDAO<Account> implements IAccountDAO {
     }
 
     @Override
-    public boolean insert(Account account) {
+    public Long insert(Account account) {
         String sql = "INSERT INTO Account(Username, Password, Role_ID, CreatedDate, CreatedBy) values(?, ?, ?, ?, ?)";
-        return update(sql, account.getUserName(), account.getPassword(), account.getRoleID(), account.getCreatedDate(),
+        return insert(sql, account.getUserName(), account.getPassword(), account.getRoleID(), account.getCreatedDate(),
                         account.getCreatedBy());
     }
 
