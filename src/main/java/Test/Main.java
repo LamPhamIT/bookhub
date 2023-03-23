@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Account account = new Account("customer1", "lamdeptrai", 2L);
-        System.out.println("Result : " + new AccountDAO().insert(account));
+        
     }
 }
