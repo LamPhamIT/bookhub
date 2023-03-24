@@ -20,11 +20,26 @@ public class ProductService implements IProductService {
         product.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         product.setCreatedBy("");
         Long productID = productDAO.insert(product);
+        System.out.println("Hello");
         return productDAO.findOne(productID);
     }
 
     @Override
     public List<Product> findAll() {
         return productDAO.findAll();
+    }
+
+    @Override
+    public void delete(Product product) {
+         for(Long productID : product.getIds()) {
+             productDAO.deleteOne(productID);
+         }
+    }
+
+    @Override
+    public void update(Product product) {
+        product.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+        product.setModifiedBy("");
+        productDAO.update(product);
     }
 }

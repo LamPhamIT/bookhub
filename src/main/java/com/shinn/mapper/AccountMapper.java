@@ -13,7 +13,7 @@ public class AccountMapper implements RowMapper<Account>{
             account.setId(resultSet.getLong("Account_ID"));
             account.setUserName(resultSet.getString("Username"));
             account.setPassword(resultSet.getString("password"));
-            account.setRoleID(resultSet.getLong("Role_ID"));
+            account.setRoleId(resultSet.getLong("Role_ID"));
             account.setCreatedDate(resultSet.getTimestamp("CreatedDate"));
             account.setModifiedDate(resultSet.getTimestamp("ModifiedDate"));
             account.setCreatedBy(resultSet.getString("CreatedBy"));

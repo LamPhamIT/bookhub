@@ -15,6 +15,6 @@ public class Product extends AbstractModel{
     private String details;
     private Double price;
     private Double discount;
-    private Long brandID;
+    private Long brandId;
     private String note;
 }

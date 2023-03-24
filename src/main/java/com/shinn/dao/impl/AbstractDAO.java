@@ -56,9 +56,10 @@ public class AbstractDAO<T> implements GenericDAO<T> {
             Long id = null;
             while(resultSet.next()) {
                 id =  resultSet.getLong(1);
+                return id;
             }
             connection.commit();
-            return id;
+            return null;
         } catch (SQLException e) {
             if(connection != null) {
                 try {

@@ -17,5 +17,5 @@ public class Customer extends AbstractModel{
     private String country;
     private boolean sex;
     private String phoneNumber;
-    private long accountID;
+    private long accountId;
 }

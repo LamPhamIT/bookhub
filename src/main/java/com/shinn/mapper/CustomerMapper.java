@@ -20,7 +20,7 @@ public class CustomerMapper implements RowMapper<Customer>{
             customer.setCountry(resultSet.getString("Country"));
             customer.setSex(resultSet.getBoolean("Sex"));
             customer.setPhoneNumber(resultSet.getString("Phone_Number"));
-            customer.setAccountID(resultSet.getLong("Account_ID"));
+            customer.setAccountId(resultSet.getLong("Account_ID"));
             return customer;
         } catch (SQLException e) {
             return null;
