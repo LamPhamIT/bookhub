@@ -16,7 +16,24 @@ public class ProductMapper implements RowMapper<Product> {
             product.setDetails(resultSet.getString("Details"));
             product.setPrice(resultSet.getDouble("Price"));
             product.setDiscount(resultSet.getDouble("Discount"));
+
+            // Set kiểu dữ liệu Blob
+
+
             product.setBrandId(resultSet.getLong("Brand_ID"));
+            product.setNote(resultSet.getString("Note"));
+            product.setCreatedDate(resultSet.getTimestamp("Createddate"));
+            product.setCreatedBy(resultSet.getString("Createdby"));
+
+
+
+            if(resultSet.getTimestamp("Modifieddate") != null) {
+                product.setModifiedDate(resultSet.getTimestamp("Modifieddate"));
+            }
+            if(resultSet.getString("Modifiedby") != null) {
+                product.setModifiedBy(resultSet.getString("Modifiedby"));
+            }
+
             return product;
         } catch (SQLException e) {
             return null;

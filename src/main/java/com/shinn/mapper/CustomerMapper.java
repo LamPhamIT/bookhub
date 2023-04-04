@@ -20,7 +20,16 @@ public class CustomerMapper implements RowMapper<Customer>{
             customer.setCountry(resultSet.getString("Country"));
             customer.setSex(resultSet.getBoolean("Sex"));
             customer.setPhoneNumber(resultSet.getString("Phone_Number"));
+
+            // set Avatar dữ liệu kiểu LongBlob
+
             customer.setAccountId(resultSet.getLong("Account_ID"));
+            customer.setCreatedDate(resultSet.getTimestamp("Createddate"));
+            customer.setModifiedDate(resultSet.getTimestamp("Modifieddate"));
+
+            // Bị Null nếu tạo và chưa chỉnh sửa. ---> Fix
+            customer.setCreatedBy(resultSet.getString("Createdby"));
+            customer.setModifiedBy(resultSet.getString("Modifiedby"));
             return customer;
         } catch (SQLException e) {
             return null;

@@ -21,7 +21,7 @@ public class Main {
         product.setDetails("Như cc");
         product.setPrice(200.0);
         product.setDiscount(23.4);
-        product.setBrandID(1L);
+        product.setBrandId(1L);
         product.setNote("Nhu cc");
         IProductService productService = new ProductService();
         product = productService.save(product);

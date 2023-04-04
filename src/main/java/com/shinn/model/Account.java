@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Account extends AbstractModel {
+public class Account extends AbstractModel<Account> {
     private String userName;
     private String password;
     private Long roleId;

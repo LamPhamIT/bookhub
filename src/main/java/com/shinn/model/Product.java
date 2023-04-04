@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-public class Product extends AbstractModel{
+public class Product extends AbstractModel<Product>{
     private String name;
     private String descrip;
     private String details;

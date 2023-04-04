@@ -10,7 +10,8 @@ import java.io.IOException;
 public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/web/Home.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     @Override

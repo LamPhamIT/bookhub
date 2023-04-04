@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-public class Customer extends AbstractModel{
+public class Customer extends AbstractModel<Customer>{
     private String firstName;
     private String lastName;
     private String email;
