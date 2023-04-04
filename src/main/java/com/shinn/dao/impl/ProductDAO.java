@@ -3,14 +3,21 @@ package com.shinn.dao.impl;
 import com.shinn.dao.idao.IProductDAO;
 import com.shinn.mapper.ProductMapper;
 import com.shinn.model.Product;
+import com.shinn.paging.Pageble;
 
 import java.util.List;
 
 public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
     @Override
-    public List<Product> findAll() {
-        String sql = "SELECT * FROM Product";
-        return query(sql, new ProductMapper());
+    public List<Product> findAll(Pageble paging) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM Product ");
+        if(paging.getSorter() != null) {
+            sql.append("ORDER BY " + paging.getSorter().getSortBy() + " " + paging.getSorter().getSortName());
+        }
+        if(paging.getOffset() != null && paging.getLimit() != null) {
+            sql.append(" LIMIT " + paging.getOffset() + ", " + paging.getLimit());
+        }
+        return query(sql.toString(), new ProductMapper());
     }
 
     @Override
@@ -46,5 +53,11 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
         stringBuilder.append("Price=?, Discount=?, Image=?, Brand_ID=?, Note=? WHERE Product_ID=?");
         update(stringBuilder.toString(), product.getName(), product.getDescrip(), product.getDetails(), product.getPrice(),
                 product.getDiscount(), "", product.getBrandId(), product.getNote(), product.getId());
+    }
+
+    @Override
+    public Integer count() {
+        String sql = "SELECT COUNT(*) FROM Product";
+        return count(sql);
     }
 }

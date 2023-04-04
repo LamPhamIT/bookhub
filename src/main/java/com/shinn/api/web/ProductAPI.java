@@ -1,8 +1,12 @@
 package com.shinn.api.web;
 
 import com.shinn.model.Product;
+import com.shinn.paging.PageRequest;
+import com.shinn.paging.Pageble;
 import com.shinn.services.impl.ProductService;
 import com.shinn.services.iservice.IProductService;
+import com.shinn.sorter.Sorter;
+import com.shinn.utils.FormUtil;
 import com.shinn.utils.HttpUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -14,16 +18,18 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/api-products"})
 public class ProductAPI extends HttpServlet {
+    @Inject
     private IProductService productService;
-    public ProductAPI() {
-        productService = new ProductService();
-    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Product product = FormUtil.toModel(Product.class, request);
+        Pageble paging = new PageRequest(product.getPage(), product.getMaxPageItem(),
+                    new Sorter(product.getSortName(), product.getSortBy()));
         ObjectMapper objectMapper = new ObjectMapper();
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");        // Báo cho client dữ liệu trả về là Json
-        List< Product> list = productService.findAll();
+        List< Product> list = productService.findAll(paging);
         objectMapper.writeValue(response.getOutputStream(), list);     // Hiển thị dữ liệu Json
     }
 

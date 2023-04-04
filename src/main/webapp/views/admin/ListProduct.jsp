@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Trang chủ</title>
-    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/bootstrap.min.css' />" />
-    <link rel="stylesheet" href="<c:url value='/template/admin/font-awesome/4.5.0/css/font-awesome.min.css' />" />
-    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/ace.min.css' />" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/bootstrap.min.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/admin/font-awesome/4.5.0/css/font-awesome.min.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/ace.min.css' />" class="ace-main-stylesheet"
+          id="main-ace-style"/>
     <script src="<c:url value='/template/admin/assets/js/ace-extra.min.js' />"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -51,12 +52,18 @@
 
 <div class="main-container" id="main-container">
     <script type="text/javascript">
-        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
     </script>
     <!-- header -->
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
-            try{ace.settings.loadState('sidebar')}catch(e){}
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
         </script>
         <div class="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large">
@@ -87,7 +94,7 @@
             </div>
         </div>
         <ul class="nav nav-list">
-            <li >
+            <li>
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-list"></i>
                     <span class="menu-text"></span>
@@ -107,34 +114,36 @@
             </li>
         </ul>
         <div class="sidebar-toggle sidebar-collapse">
-            <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left"
+               data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
     <!-- header -->
-    <form action="<c:url value='/admin-products'/>" method="GET" id="formSubmit">
     <div class="main-content">
-        <div class="main-content-inner">
-            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">Trang chủ</a>
-                    </li>
-                </ul><!-- /.breadcrumb -->
-            </div>
+    <form action="<c:url value='/admin-products'/>" method="GET" id="formSubmit">
+            <div class="main-content-inner">
+                <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="ace-icon fa fa-home home-icon"></i>
+                            <a href="#">Trang chủ</a>
+                        </li>
+                    </ul><!-- /.breadcrumb -->
+                </div>
 
-            <div class="page-content">
-                <div class="row" >
-                    <div class="col-xs-12">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-xs-12">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Descrip</th>
-                                            <th>Price</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Descrip</th>
+                                        <th>Price</th>
+                                    </tr>
                                     </thead>
+                                    <tbody>
                                     <c:forEach var="item" items="${model.listResult}">
                                         <tr>
                                             <td>${item.name}</td>
@@ -147,14 +156,16 @@
                                 <ul class="pagination" id="pagination"></ul>
                                 <input type="hidden" value="" id="page" name="page"/>
                                 <input type="hidden" value="" id="maxPageItem" name="maxPageItem"/>
+                                <input type="hidden" value="" id="sortBy" name="sortBy"/>
+                                <input type="hidden" value="" id="sortName" name="sortName"/>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div><!-- /.main-content -->
+       <!-- /.main-content -->
     </form>
+    </div>
     <!-- footer -->
 
 
@@ -164,18 +175,21 @@
 </div>
 <script type="text/javascript">
     $(function () {
-       let currentPage = ${model.page};
-       let totalPage = ${model.totalPage};
-       let limit = 3;
+        let currentPage = ${model.page};
+        let totalPage = ${model.totalPage};
+        let limit = 3
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPage,
-            visiblePages: limit,
+            visiblePages: 2,
             startPage: currentPage,
             onPageClick: function (event, page) {
-                //console.info(page + ' (from options)');
-                $('#maxPageItem').val(limit)
-                $('#page').val(page);
-                $('#formSubmit').submit;
+               if(currentPage != page) {
+                   $('#sortBy').val("Price");
+                   $('#sortName').val("desc");
+                   $('#maxPageItem').val(limit);
+                   $('#page').val(page);
+                   $('#formSubmit').submit();
+               }
             }
         });
     });

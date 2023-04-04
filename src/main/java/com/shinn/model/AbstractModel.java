@@ -21,5 +21,9 @@ public class AbstractModel<T> {
     private List<T> listResult = new ArrayList<>();
     private Integer page;
     private Integer maxPageItem;
-    private Integer totalPage;
+    private String sortBy;
+    private String sortName;
+    private int totalPage;
+    private Integer totalItem;
+
 }

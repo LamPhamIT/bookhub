@@ -6,10 +6,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/api-customers"})
 public class CustomerAPI extends HttpServlet {
+    @Inject
     private ICustomerService customerService;
 
     public CustomerAPI() {

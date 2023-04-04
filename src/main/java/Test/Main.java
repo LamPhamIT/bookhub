@@ -15,16 +15,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        Product product = new Product();
-        product.setName("Legion");
-        product.setDescrip("Như cc");
-        product.setDetails("Như cc");
-        product.setPrice(200.0);
-        product.setDiscount(23.4);
-        product.setBrandId(1L);
-        product.setNote("Nhu cc");
-        IProductService productService = new ProductService();
-        product = productService.save(product);
-        System.out.println(product.toString());
+
     }
 }
