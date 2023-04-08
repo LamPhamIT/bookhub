@@ -5,12 +5,15 @@ import com.shinn.dao.impl.CustomerDAO;
 import com.shinn.model.Customer;
 import com.shinn.services.iservice.ICustomerService;
 
-import javax.inject.Inject;
 import java.util.List;
 
 public class CustomerService implements ICustomerService {
-    @Inject
+//    @Inject
+//    private ICustomerDAO customerDAO;   // Fix
     private ICustomerDAO customerDAO;
+    public CustomerService() {
+        customerDAO = new CustomerDAO();
+    }
 
     @Override
     public List<Customer> findAll() {

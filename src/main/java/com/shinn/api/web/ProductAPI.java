@@ -12,18 +12,22 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.codehaus.jackson.map.ObjectMapper;
-import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/api-products"})
 public class ProductAPI extends HttpServlet {
-    @Inject
+//    @Inject
+//    private IProductService productService;   Fix
     private IProductService productService;
+    public ProductAPI() {
+        productService = new ProductService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = FormUtil.toModel(Product.class, request);
+
         Pageble paging = new PageRequest(product.getPage(), product.getMaxPageItem(),
                     new Sorter(product.getSortName(), product.getSortBy()));
         ObjectMapper objectMapper = new ObjectMapper();

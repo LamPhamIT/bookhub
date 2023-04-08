@@ -11,7 +11,7 @@ public class ProductDAO extends AbstractDAO<Product> implements IProductDAO {
     @Override
     public List<Product> findAll(Pageble paging) {
         StringBuilder sql = new StringBuilder("SELECT * FROM Product ");
-        if(paging.getSorter() != null) {
+        if(paging.getSorter().getSortBy() != null && paging.getSorter().getSortName() != null) {
             sql.append("ORDER BY " + paging.getSorter().getSortBy() + " " + paging.getSorter().getSortName());
         }
         if(paging.getOffset() != null && paging.getLimit() != null) {

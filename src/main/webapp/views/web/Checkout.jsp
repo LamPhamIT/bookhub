@@ -227,8 +227,8 @@
                     </div>
                     <div class="form-group">
                         <div class="input-checkbox">
-                            <input type="checkbox" id="create-account">
-                            <label for="create-account">
+                            <input type="checkbox" id="create-user">
+                            <label for="create-user">
                                 <span></span>
                                 Create Account?
                             </label>

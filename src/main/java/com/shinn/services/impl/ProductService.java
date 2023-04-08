@@ -6,16 +6,18 @@ import com.shinn.model.Product;
 import com.shinn.paging.Pageble;
 import com.shinn.services.iservice.IProductService;
 
-
-import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.util.List;
 
 public class ProductService implements IProductService {
 
-    @Inject
-    private IProductDAO productDAO;
+//    @Inject
+//    private IProductDAO productDAO;   Fix
 
+    private IProductDAO productDAO;
+    public ProductService() {
+        productDAO = new ProductDAO();
+    }
     @Override
     public Product save(Product product) {
         product.setCreatedDate(new Timestamp(System.currentTimeMillis()));

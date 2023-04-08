@@ -5,8 +5,10 @@ import com.shinn.mapper.RowMapper;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
     @Override
     public <T1> List<T1> query(String sql, RowMapper<T1> rowMapper, Object... parameters) {
         List<T1> list = new ArrayList<>();
@@ -135,10 +137,10 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 
     public Connection getConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/JSP_Servlet";
-            String user = "root";
-            String password = "lamdz2k4";
+            Class.forName(resourceBundle.getString("driverName")); //
+            String url =  resourceBundle.getString("url");
+            String user =  resourceBundle.getString("user");
+            String password = resourceBundle.getString("password");
             return DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
             return null;

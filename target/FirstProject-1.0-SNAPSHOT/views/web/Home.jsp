@@ -50,7 +50,13 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <c:if test="${empty USERMODEL}">
+                    <li><a href="<c:url value="/dang-nhap?action=login"/>">Login</a></li>
+                </c:if>
+                <c:if test="${not empty USERMODEL}">
+                    <li><a href="#">Wellcome, ${USERMODEL.userName}</a></li>
+                    <li><a href="<c:url value="/dang-nhap?action=logout"/>">Logout</a></li>
+                </c:if>
             </ul>
         </div>
     </div>

@@ -11,15 +11,16 @@ import com.shinn.utils.FormUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
-import javax.inject.Inject;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/admin-products"})
 public class ProductController extends HttpServlet {
-    @Inject
+//    @Inject
+//    private IProductService productService;  Fix
     private IProductService productService;
-
+    public ProductController() {
+        productService = new ProductService();
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = FormUtil.toModel(Product.class, request);

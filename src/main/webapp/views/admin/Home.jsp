@@ -32,10 +32,10 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Xin chào Bro
+                        Xin chào ${USERMODEL.userName}
                     </a>
                 <li class="light-blue dropdown-modal">
-                    <a href='#'>
+                    <a href='<c:url value="/dang-nhap?action=logout"/>'>
                         <i class="ace-icon fa fa-power-off"></i>
                         Thoát
                     </a>

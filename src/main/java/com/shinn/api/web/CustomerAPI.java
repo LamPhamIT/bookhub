@@ -2,16 +2,17 @@ package com.shinn.api.web;
 
 import com.shinn.services.impl.CustomerService;
 import com.shinn.services.iservice.ICustomerService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-
-import javax.inject.Inject;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/api-customers"})
 public class CustomerAPI extends HttpServlet {
-    @Inject
+//    @Inject
+//    private ICustomerService customerService;
     private ICustomerService customerService;
 
     public CustomerAPI() {
