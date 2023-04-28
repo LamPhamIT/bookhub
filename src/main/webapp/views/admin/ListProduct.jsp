@@ -34,10 +34,10 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Xin chào Bro
+                        Xin chao ${USERMODEL.userName}
                     </a>
                 <li class="light-blue dropdown-modal">
-                    <a href='#'>
+                    <a href='<c:url value="/dang-nhap?action=logout"/>'>
                         <i class="ace-icon fa fa-power-off"></i>
                         Thoát
                     </a>
@@ -120,7 +120,7 @@
     </div>
     <!-- header -->
     <div class="main-content">
-    <form action="<c:url value='/admin-products'/>" method="GET" id="formSubmit">
+        <form action="<c:url value='/admin-products'/>" method="GET" id="formSubmit">
             <div class="main-content-inner">
                 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                     <ul class="breadcrumb">
@@ -133,6 +133,29 @@
 
                 <div class="page-content">
                     <div class="row">
+                        <div class="widget-box table-filter">
+                            <div class="table-btn-controls">
+                                <div class="pull-right tableTools-container">
+                                    <div class="dt-buttons btn-overlap btn-group">
+                                        <a flag="info"
+                                           class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
+                                           data-toggle="tooltip"
+                                           title='Thêm san pham' href='<c:url value="/admin-products?type=edit"/>'>
+															<span>
+																<i class="fa fa-plus-circle bigger-110 purple"></i>
+															</span>
+                                        </a>
+                                        <button id="btnDelete" type="button"
+                                                class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
+                                                data-toggle="tooltip" title='Xóa san pham'>
+																<span>
+																	<i class="fa fa-trash-o bigger-110 pink"></i>
+																</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xs-12">
                             <div class="table-responsive">
                                 <table class="table">
@@ -141,14 +164,25 @@
                                         <th>Name</th>
                                         <th>Descrip</th>
                                         <th>Price</th>
+                                        <th>Manipulate</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="item" items="${model.listResult}">
+                                    <c:forEach var="item" items="${MODEL.listResult}">
                                         <tr>
                                             <td>${item.name}</td>
                                             <td>${item.descrip}</td>
                                             <td>${item.price}</td>
+                                            <td>
+                                                <c:url var="editURL" value="/admin-products">
+                                                    <c:param name="type" value="edit"/>
+                                                    <c:param name="id" value="${item.id}"/>
+                                                </c:url>
+                                                <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+                                                   title="Cập san pham" href='${editURL}'><i
+                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -158,13 +192,14 @@
                                 <input type="hidden" value="" id="maxPageItem" name="maxPageItem"/>
                                 <input type="hidden" value="" id="sortBy" name="sortBy"/>
                                 <input type="hidden" value="" id="sortName" name="sortName"/>
+                                <input type="hidden" value="" id="type" name="type"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-       <!-- /.main-content -->
-    </form>
+            <!-- /.main-content -->
+        </form>
     </div>
     <!-- footer -->
 
@@ -175,21 +210,22 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        let currentPage = ${model.page};
-        let totalPage = ${model.totalPage};
+        let currentPage = ${MODEL.page};
+        let totalPage = ${MODEL.totalPage};
         let limit = 3
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPage,
             visiblePages: 2,
             startPage: currentPage,
             onPageClick: function (event, page) {
-               if(currentPage != page) {
-                   $('#sortBy').val("Price");
-                   $('#sortName').val("desc");
-                   $('#maxPageItem').val(limit);
-                   $('#page').val(page);
-                   $('#formSubmit').submit();
-               }
+                if (currentPage != page) {
+                    $('#sortBy').val("Price");
+                    $('#sortName').val("desc");
+                    $('#maxPageItem').val(limit);
+                    $('#page').val(page);
+                    $('#type').val("list");
+                    $('#formSubmit').submit();
+                }
             }
         });
     });

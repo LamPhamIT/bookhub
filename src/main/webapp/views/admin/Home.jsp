@@ -96,7 +96,7 @@
                 <b class="arrow"></b>
                 <ul class="submenu">
                     <li>
-                        <a href='<c:url value='/admin-products?page=1&maxPageItem=2&sortBy=price&sortName=desc'/>'>
+                        <a href='<c:url value='/admin-products?type=list&page=1&maxPageItem=2&sortBy=price&sortName=desc'/>'>
                             <i class="menu-icon fa fa-caret-right"></i>
                             DS sản phẩm
                         </a>

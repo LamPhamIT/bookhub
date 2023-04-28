@@ -3,25 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-
     <display-name>First project</display-name>
-
 <!--    <listener>-->
 <!--        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>-->
 <!--    </listener>-->
     <filter>
-        <filter-name>servletFilter</filter-name>
-        <filter-class>com.shinn.Filter.AuthorizationFilter</filter-class>
+        <filter-name>myFilter</filter-name>
+        <filter-class>com.shinntl.Filter.AuthorizationFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>servletFilter</filter-name>
+        <filter-name>myFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-
-
 </web-app>
